@@ -1,0 +1,53 @@
+﻿@model IEnumerable<UserLoginDemo.Models.UserInfo>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<head>
+
+    <link rel="stylesheet" href="~/css/Style.css" />
+</head>
+<body>
+    <h1>User Info</h1>
+    @using (Html.BeginForm("Logout", "Layout", FormMethod.Post))
+    {
+        <p><input type="hidden" name="username" value=@ViewBag.username></p>
+        <table border="2">
+            <tr>
+                <th>User Name </th>
+                <th>Role </th>
+                <th>Access Right </th>
+            </tr>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>@d.USER_NAME</td>
+                    <td>
+                        @if (@d.ROLE == 1)
+                        {
+                            <span>System Administrator</span>
+                        }
+                        else
+                        {
+                            <span>General</span>
+                        }
+
+                    </td>
+                    <td>
+                        @if (@d.ACCESS_RIGHT == 1)
+                        {
+                            <span>Full Access (CRUD)</span>
+                        }
+                        else
+                        {
+                            <span>Only Read Access (R)</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+        <p class="submit"><input type="submit" name="commit" value="Logout"></p>
+    }
+
+</body>
